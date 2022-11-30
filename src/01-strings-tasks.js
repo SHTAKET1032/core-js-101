@@ -226,8 +226,38 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alfabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const alfabet13 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+
+  const strNum = [];
+
+  for (let i = 0; i < str.length; i += 1) {
+    for (let g = 0; g < alfabet.length; g += 1) {
+      if (str[i] === alfabet[g]) {
+        strNum.push(alfabet.indexOf(alfabet[g]));
+      }
+    }
+    if (str[i] === ' ') {
+      strNum.push('+');
+    } else if (str[i] === '!' || str[i] === '?') {
+      strNum.push(str[i]);
+    }
+  }
+
+  const newArr = [];
+
+  for (let m = 0; m < strNum.length; m += 1) {
+    newArr.push(alfabet13[strNum[m]]);
+    if (strNum[m] === ('+')) {
+      newArr.push('+');
+    } else if (strNum[m] === '!' || strNum[m] === '?') {
+      newArr.push(strNum[m]);
+    }
+  }
+
+  const newStr = newArr.join('');
+  return newStr.replace(/[+]/g, ' ');
 }
 
 /**
@@ -272,8 +302,13 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const deck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+
+  return deck.indexOf(value);
 }
 
 
