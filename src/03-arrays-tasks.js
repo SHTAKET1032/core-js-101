@@ -269,8 +269,16 @@ function getMovingSum(arr) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  const newArr = [];
+
+  // eslint-disable-next-line array-callback-return
+  arr.map((item, index) => {
+    if (index % 2 !== 0) {
+      newArr.push(item);
+    }
+  });
+  return newArr;
 }
 
 
@@ -288,8 +296,8 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.reduce((result, item, index) => result.concat(Array(index + 1).fill(item)), []);
 }
 
 
@@ -306,8 +314,9 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  return arr.sort((a, b) => b - a)
+    .slice(0, 3);
 }
 
 
@@ -324,8 +333,15 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  let counter = 0;
+  // eslint-disable-next-line array-callback-return
+  arr.map((item) => {
+    if (typeof item === 'number' && item > 0) {
+      counter += 1;
+    }
+  });
+  return counter;
 }
 
 /**
